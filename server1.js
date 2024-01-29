@@ -1,14 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const foodRouter = require("./routes/foodRoutes.js");
-
+require('dotenv').config();
 const app = express();
 
 app.use(express.json());
-
-adminPassword = 'Cel@2024';
 mongoose.connect(
-    `mongodb+srv://lakshmicelestial:${encodeURIComponent(adminPassword)}@cluster0.apl8aqf.mongodb.net/?retryWrites=true&w=majority`,
+    process.env.URL,
     {
         useNewUrlParser: true,
         // useFindAndModify: false,
@@ -18,6 +16,8 @@ mongoose.connect(
 
 app.use(foodRouter);
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
+    // console.log(process.env.PASS, "testing");
+    console.log("listening to port ", process.env.PORT);
     console.log("Server is running...");
 });
